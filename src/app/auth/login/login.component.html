@@ -1,0 +1,114 @@
+<h1 id="title" class="title">PharmaTunisie</h1>
+<p class="sub-title">Salut! Connectez-vous a votre Plateforme</p>
+
+<nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert">
+  <p class="alert-title"><b>Oh snap!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let error of errors" class="alert-message">{{ error }}</li>
+  </ul>
+</nb-alert>
+
+<nb-alert *ngIf="showMessages.success && messages?.length && !submitted" outline="success" role="alert">
+  <p class="alert-title"><b>Hooray!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let message of messages" class="alert-message">{{ message }}</li>
+  </ul>
+</nb-alert>
+
+<form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" aria-labelledby="title">
+ 
+    <div class="form-control-group">
+    <label class="label" for="username">Identifiant :</label>
+    <input nbInput
+           fullWidth
+           [(ngModel)]="form.username"
+           #username="ngModel"
+           name="username"
+           id="username"
+         
+           placeholder="Identifiant"
+           fieldSize="large"
+           autofocus
+           [status]="username.dirty ? (username.invalid  ? 'danger' : 'success') : 'basic'"
+           [required]="getConfigValue('forms.validation.username.required')"
+           [attr.aria-invalid]="username.invalid && username.touched ? true : null">
+           
+    <ng-container *ngIf="username.invalid && username.touched">
+      <p class="caption status-danger" *ngIf="username.errors?.required">
+        Identifiant est obligatoire!
+      </p>
+      <p class="caption status-danger" *ngIf="username.errors?.pattern">
+        le nom d'utilisateur doit être le vrai !
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group">
+    <span class="label-with-link">
+      <label class="label" for="password">Mot de passe:</label>
+      <a class="forgot-password caption-2" routerLink="../request-password">Mot de passe oublié?</a>
+    </span>
+    <input nbInput
+           fullWidth
+           [(ngModel)]="form.password"
+           #password="ngModel"
+           name="password"
+           type="password"
+           id="password"
+           placeholder="Mot de passe"
+           fieldSize="large"
+           [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : 'basic'"
+           [required]="getConfigValue('forms.validation.password.required')"
+           [minlength]="getConfigValue('forms.validation.password.minLength')"
+           [maxlength]="getConfigValue('forms.validation.password.maxLength')"
+           [attr.aria-invalid]="password.invalid && password.touched ? true : null">
+    <ng-container *ngIf="password.invalid && password.touched ">
+      <p class="caption status-danger" *ngIf="password.errors?.required">
+        Mot de passe est obligatoire!
+      </p>
+      <p class="caption status-danger" *ngIf="password.errors?.minlength || password.errors?.maxlength">
+        Le mot de passe doit contenir
+        de {{ getConfigValue('forms.validation.password.minLength') }}
+        à {{ getConfigValue('forms.validation.password.maxLength') }}
+        des caractères 
+      </p>
+    </ng-container>
+  </div>
+
+  <div class="form-control-group accept-group">
+    <nb-checkbox name="rememberMe" [(ngModel)]="form.rememberMe" *ngIf="rememberMe">Remember me</nb-checkbox>
+  </div>
+
+  <button nbButton
+          fullWidth
+          status="primary"
+          size="large">
+    Se connecter
+  </button>
+</form>
+
+<section *ngIf="socialLinks && socialLinks.length > 0" class="links" aria-label="Social sign in">
+  
+  <div class="socials">
+    <ng-container *ngFor="let socialLink of socialLinks">
+      <a *ngIf="socialLink.link"
+         [routerLink]="socialLink.link"
+         [attr.target]="socialLink.target"
+         [attr.class]="socialLink.icon"
+         [class.with-icon]="socialLink.icon">
+        <nb-icon *ngIf="socialLink.icon; else title" [icon]="socialLink.icon"></nb-icon>
+        <ng-template #title>{{ socialLink.title }}</ng-template>
+      </a>
+      <a *ngIf="socialLink.url"
+         [attr.href]="socialLink.url"
+         [attr.target]="socialLink.target"
+         [attr.class]="socialLink.icon"
+         [class.with-icon]="socialLink.icon">
+        <nb-icon *ngIf="socialLink.icon; else title" [icon]="socialLink.icon"></nb-icon>
+        <ng-template #title>{{ socialLink.title }}</ng-template>
+      </a>
+    </ng-container>
+  </div>
+</section>
+
+

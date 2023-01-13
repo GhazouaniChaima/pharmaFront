@@ -1,0 +1,66 @@
+<nb-card>
+  <nb-card-header>Modifier utilisateur</nb-card-header>
+  <nb-card-body>
+    <form (ngSubmit)="onEditConfirm()">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="username" class="label">Identifiant</label>
+            <input type="text" name="username" nbInput fullWidth id="username" [(ngModel)]="user.username" >
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="fullName" class="label">Nom et prénom</label>
+            <input type="text" name="fullName" nbInput fullWidth id="fullName" [(ngModel)]="user.fullName">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="email" class="label">Email</label>
+            <input type="text" name="email" nbInput fullWidth id="email" [(ngModel)]="user.email">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="address" class="label">Adresse</label>
+            <input type="text" name="address" nbInput fullWidth id="address" [(ngModel)]="user.address">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="phone" class="label">Téléphone</label>
+            <input type="number" name="phone" nbInput fullWidth id="phone" [(ngModel)]="user.phone">
+          </div>
+        </div>
+        
+      </div>
+
+      <!-- <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputEmail" class="label">Mot de passe</label>
+                <input type="password" nbInput fullWidth id="inputEmail" placeholder="Mot de passe">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="inputWebsite" class="label">Confirmer mot de passe</label>
+                <input type="password" nbInput fullWidth id="inputWebsite" placeholder="Confirmer mot de passe">
+              </div>
+            </div>
+          </div> -->
+      <div class="float-right">
+        <button type="submit" nbButton status="primary">Modifier</button>
+      </div>
+    </form>
+    <br><br><br><div class="alert alert-success" *ngIf="isSuccessful">
+      Votre modification est réussie !
+    </div>
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,92 @@
+
+<nb-card class="list-card">
+
+
+
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-10">
+                <h5 class="w-75 p-3">Utilisateurs</h5>
+            </div>
+            <div class="col-md-2 float-right">
+                <button (click)="routerAdd()" style="margin-top: 15px;" type="button" class="btn btn-primary">
+
+                    <nb-icon icon="plus-square-outline"></nb-icon>
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div>
+        <nb-list>
+            <nb-list-item *ngFor="let user of users">
+                <div class="row">
+                    
+                
+                        <div class=".col-md-3" style="position:relative; top: 15px; left: 10px; ">
+
+                            <img src="../../../../assets/images/useer.png" height="40" />
+
+
+                        </div>
+                        <div class=".col-md-3" style="position:relative;left: 30px;width: 15rem;">
+                            <span style="font-size: large;color: #000;"><b>{{user.username}}
+                                    {{user.fullName}}</b></span>
+                            <br><span style="font-size: small;color: #000;">
+                                <nb-icon icon="email-outline"></nb-icon> {{user.email}}
+                            </span>
+                            <br> <span style="font-size: small;color: rgb(73, 73, 73);">
+                                <nb-icon icon="phone-outline"></nb-icon> {{user.phone}}
+                            </span>
+                        </div>
+
+
+                        <div class=".col-md-3" style="position:relative;left: 80px; top: 20px;width: 15rem; ">
+
+                            <div *ngIf=" user.enable == true ; else elseBlock">
+                                <span style="font-size: large;color: rgb(11, 179, 20);">
+                                    <b>
+                                        <nb-icon icon="checkmark-square-outline"></nb-icon>Actif
+                                    </b>
+                                </span>
+                            </div>
+                            <ng-template #elseBlock>
+                                <span style="font-size: large;color: rgb(235, 81, 81);">
+                                    <b>
+                                        <nb-icon icon="close-square-outline"></nb-icon>Inactif
+                                    </b>
+                                </span>
+                            </ng-template>
+
+
+                            <br><span style="font-size: small;color: #000;">
+                                <nb-icon icon="home-outline"></nb-icon> {{user.address}}
+                            </span>
+
+                        </div>
+                  
+                    <div class=".col-md-3 float-right" style="position:relative;left: 140px; top: 20px; ">
+                    <!-- <div class="buttondesgin"> -->
+                        <button (click)="onDeactivateConfirm(user.id)" type="button" class="btn btn-danger">
+                            <nb-icon icon="close-square-outline"></nb-icon>
+                        </button>
+                        <button (click)="onActivateConfirm(user.id)" style="margin-left: 10px" type="button"
+                            class="btn btn-success">
+                            <nb-icon icon="checkmark-square-outline"></nb-icon>
+                        </button>
+
+                        <button (click)="routerUpdate(user.id)" style="margin-left: 10px" type="button"
+                            class="btn btn-warning">
+                            <nb-icon icon="edit-outline"></nb-icon>
+                        </button>
+                    </div>
+                    </div>
+                <!-- </div> -->
+
+            </nb-list-item>
+        </nb-list>
+    </div>
+</nb-card> 

@@ -1,0 +1,154 @@
+<nb-card>
+  <nb-card-header>Ajouter utilisateur</nb-card-header>
+  <nb-card-body>
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" aria-labelledby="title">
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="username" class="label">Identifiant</label>
+            <input type="text" name="username" nbInput fullWidth id="username" [(ngModel)]="form.username" required
+              minlength="3" maxlength="20" #username="ngModel" placeholder="Identifiant">
+          </div>
+
+          <div class="alert-danger" *ngIf="username.errors && f.submitted">
+            <div *ngIf="username.errors.required">Identifiant est obligatoire</div>
+            <div *ngIf="username.errors.minlength">
+              L'identifiant d'utilisateur doit comporter au moins 3 caractères
+            </div>
+            <div *ngIf="username.errors.maxlength">
+              L'identifiant d'utilisateur ne doit pas dépasser 20 caractères
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="fullName" class="label">Nom et prénom</label>
+            <input type="text" name="fullName" nbInput fullWidth id="fullName" [(ngModel)]="form.fullName" required
+              minlength="3" maxlength="20" #fullName="ngModel" placeholder="Nom et prénom">
+          </div>
+
+          <div class="alert-danger" *ngIf="username.errors && f.submitted">
+            <div *ngIf="username.errors.required">Username est obligatoire</div>
+            <div *ngIf="username.errors.minlength">
+              Le nom et prénom doit comporter au moins 3 caractères
+            </div>
+            <div *ngIf="username.errors.maxlength">
+              Le nom et prénom ne doit pas dépasser 20 caractères
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="email" class="label">Email</label>
+            <input type="text" name="email" nbInput fullWidth id="email" [(ngModel)]="form.email" required 
+            #email="ngModel" placeholder="Email">
+          </div>
+
+          <div class="alert-danger" *ngIf="email.errors && f.submitted">
+            <div *ngIf="email.errors.required">Email est obligatoire</div>
+            <div *ngIf="email.errors.email">
+              L'e-mail doit être une adresse e-mail valide
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="address" class="label">Adresse</label>
+            <input type="text" name="address" nbInput fullWidth id="address" [(ngModel)]="form.address" required
+              minlength="3" maxlength="20" #address="ngModel" placeholder="Adresse">
+          </div>
+
+          <div class="alert-danger" *ngIf="address.errors && f.submitted">
+            <div *ngIf="address.errors.required">Adresse est obligatoire</div>
+            <div *ngIf="address.errors.minlength">
+              L'adresse doit comporter au moins 3 caractères
+            </div>
+            <div *ngIf="address.errors.maxlength">
+              L'adresse ne doit pas dépasser 20 caractères
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="phone" class="label">Téléphone</label>
+            <input type="number" name="phone" nbInput fullWidth id="phone" [(ngModel)]="form.phone" required
+              minlength="8" maxlength="8" #phone="ngModel" placeholder="Téléphone">
+          </div>
+
+          <div class="alert-danger" *ngIf="phone.errors && f.submitted">
+            <div *ngIf="phone.errors.required">Téléphone est obligatoire</div>
+            <div *ngIf="phone.errors.minlength">
+              Le numero du Téléphone doit comporter au moins 8 caractères
+            </div>
+            <div *ngIf="phone.errors.maxlength">
+              Le numero du Téléphone ne doit pas dépasser 8 caractères
+
+            </div>
+          </div>
+
+        </div>
+      
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="password" class="label">Mot de passe</label>
+            <input type="password" name="password" nbInput fullWidth id="password" [(ngModel)]="form.password" required
+              minlength="6" #password="ngModel" placeholder="Mot de passe">
+          </div>
+
+          <div class="alert-danger" *ngIf="password.errors && f.submitted">
+            <div *ngIf="password.errors.required">Mot de passe est obligatoire</div>
+            <div *ngIf="password.errors.minlength">
+              Le Mot de passe doit comporter au moins 6 caractères
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="rawPassword" class="label">Confirmer mot de passe</label>
+            <input type="password" name="rawPassword" nbInput fullWidth id="rawPassword" [(ngModel)]="form.rawPassword"
+              required #rawPassword="ngModel" placeholder="Confirmer mot de passe">
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+      <div class="float-right">
+        <button type="submit" nbButton status="primary">Ajouter</button>
+      </div><br><br>
+
+      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+        Échec d'ajout !  <br />{{ errorMessage }}
+      </div>
+    </form>
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      Votre ajout est réussie !
+    </div>
+  </nb-card-body>
+</nb-card>
+
+
+
